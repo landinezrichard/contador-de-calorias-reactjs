@@ -1,26 +1,40 @@
 import { useState } from "react";
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, SubmitEvent } from "react";
 import { categories } from "../data/categories";
 import type { Activity } from "../types";
 
 export default function Form() {
-  const[activity, setActivity] = useState<Activity>({
-	category: 1,
-	name: '',
-	calories: 0
+  const [activity, setActivity] = useState<Activity>({
+    category: 1,
+    name: "",
+    calories: 0,
   });
 
-  const handleChange = (e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
-	const isNumberField = ['category', 'calories'].includes(e.target.id);
-	console.log("isNumberField: ", isNumberField);
-	setActivity({
-		...activity,
-		[e.target.id]: isNumberField ? Number(e.target.value) : e.target.value 
-	});
+  const handleChange = (
+    e: ChangeEvent<HTMLSelectElement | HTMLInputElement>,
+  ) => {
+    const isNumberField = ["category", "calories"].includes(e.target.id);
+    // console.log("isNumberField: ", isNumberField);
+    setActivity({
+      ...activity,
+      [e.target.id]: isNumberField ? Number(e.target.value) : e.target.value,
+    });
+  };
+
+  const isValidActivity = () => {
+    const { name, calories } = activity;
+    return name.trim() !== "" && calories > 0;
+  };
+
+  const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
   };
 
   return (
-    <form className="space-y-5 bg-white shadow p-10 rounded-lg">
+    <form
+      className="space-y-5 bg-white shadow p-10 rounded-lg"
+      onSubmit={handleSubmit}
+    >
       <div className="grid grid-cols-1 gap-3">
         <label className="font-bold" htmlFor="category">
           Categoria:
@@ -28,8 +42,8 @@ export default function Form() {
         <select
           className="border border-slate-300 p-2 rounded-lg w-full bg-white"
           id="category"
-		  value={activity.category}
-		  onChange={handleChange}
+          value={activity.category}
+          onChange={handleChange}
         >
           {categories.map((category) => (
             <option key={category.id} value={category.id}>
@@ -47,31 +61,34 @@ export default function Form() {
           className="border border-slate-300 p-2 rounded-lg w-full"
           type="text"
           id="name"
-		  placeholder="Ej. Comida, Jugo de NAranja, Ensalada, Ejercicio, Pesas, Bicicleta"
-		  value={activity.name}
-		  onChange={handleChange}
+          placeholder="Ej. Comida, Jugo de NAranja, Ensalada, Ejercicio, Pesas, Bicicleta"
+          value={activity.name}
+          onChange={handleChange}
         />
       </div>
 
-	  <div className="grid grid-cols-1 gap-3">
+      <div className="grid grid-cols-1 gap-3">
         <label className="font-bold" htmlFor="calories">
-         Calorias:
+          Calorias:
         </label>
         <input
           className="border border-slate-300 p-2 rounded-lg w-full"
           type="number"
           id="calories"
-		  placeholder="Calorias consumidas o quemadas. ej. 300 o 500"
-		  value={activity.calories}
-		  onChange={handleChange}
+          placeholder="Calorias consumidas o quemadas. ej. 300 o 500"
+          value={activity.calories}
+          onChange={handleChange}
         />
       </div>
 
-	  <div className="text-center">
+      <div className="text-center">
         <input
-          className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg cursor-pointer uppercase "
+          className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg cursor-pointer uppercase disabled:opacity-50 disabled:cursor-not-allowed"
           type="submit"
-		  value="Guardar Comida o Guardar Ejercicio"
+          value={
+            activity.category === 1 ? "Guardar Comida" : "Guardar Ejercicio"
+          }
+          disabled={!isValidActivity()}
         />
       </div>
     </form>
