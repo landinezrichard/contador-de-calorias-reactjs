@@ -7,7 +7,8 @@ export type ActivityActions =
       payload: { newActivity: Activity };
     }
   | { type: "set-activeId"; payload: { activeId: Activity["id"] } }
-  | { type: "delete-activity"; payload: { activeId: Activity["id"] } };
+  | { type: "delete-activity"; payload: { activeId: Activity["id"] } }
+  | { type: "restart-app"; };
 
 // Obtener las actividades almacenadas en localStorage al cargar la aplicación
 const localStorageActivities = () : Activity[] => {
@@ -64,7 +65,11 @@ export const activityReducer = (
         ),
         activeId: "",
       };
-
+    case "restart-app":
+      return {
+        activities: [],
+        activeId: "",
+      };
     default:
       return state;
   }
