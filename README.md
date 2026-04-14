@@ -12,6 +12,7 @@ Contador de calorias, hecho en ReactJS con TypeScript, con las siguientes caract
 - Usa el hook "useReducer" para manejar el estado de las actividades.
 - Uso del hook "useMemo" para el performance.
 - Utiliza TailwindCSS para los estilos.
+- Uso de Heroicons para los iconos de "Editar" y "Eliminar".
 
 
 ## Run Server 🏃​
