@@ -1,75 +1,48 @@
-# React + TypeScript + Vite
+# Contador de Calorias 🍔🍎😋​​🚵​💪​​
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Contador de calorias, hecho en ReactJS con TypeScript, con las siguientes características:
 
-Currently, two official plugins are available:
+- Se registra la actividad: "Comida" o "Ejercicio", indicando el nombre de esta y el numero de calorias de la actividad.
+- Las actividades en la categoria "Comida", suman calorias.
+- Las actividades en la categoria "Ejercicio", restan calorias.
+- Calcula el total de calorias consumidas, quemadas y la diferencia entre ambas.
+- Se puede editar o eliminar una actividad.
+- Se puede resetear(borrar) todas las actividades.
+- Usa "localStorage" para almacenar las actividades.
+- Usa el hook "useReducer" para manejar el estado de las actividades.
+- Uso del hook "useMemo" para el performance.
+- Utiliza TailwindCSS para los estilos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## React Compiler
+## Run Server 🏃​
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Para **desarrollo**: 
 
-Note: This will impact Vite dev & build performances.
+1) Instalar dependencias.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm i
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2) Correr servidor con:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm run dev
 ```
+___
+
+Para **producción**: 
+
+1) Repetir pasos No.1 de desarrollo.
+
+2) Generar carpeta "dist" con:
+
+```bash
+pnpm run build
+```
+
+3) Subir carpeta "dist" al servidor.
+    
+## Screenshots
+
+![App Screenshot](./preview.jpg)
