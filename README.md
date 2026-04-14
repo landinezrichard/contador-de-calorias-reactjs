@@ -45,4 +45,4 @@ pnpm run build
     
 ## Screenshots
 
-![App Screenshot](./preview.ppg)
+![App Screenshot](./preview.png)
