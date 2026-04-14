@@ -9,6 +9,12 @@ export type ActivityActions =
   | { type: "set-activeId"; payload: { activeId: Activity["id"] } }
   | { type: "delete-activity"; payload: { activeId: Activity["id"] } };
 
+// Obtener las actividades almacenadas en localStorage al cargar la aplicación
+const localStorageActivities = () : Activity[] => {
+  const activities = localStorage.getItem("activities");
+  return activities ? JSON.parse(activities) : [];
+};
+
 // El tipo del estado inicial
 export type ActivityState = {
   activities: Activity[];
@@ -17,7 +23,7 @@ export type ActivityState = {
 
 // Estado inicial para el reducer de actividades
 export const initialState: ActivityState = {
-  activities: [],
+  activities: localStorageActivities(),
   activeId: "",
 };
 
