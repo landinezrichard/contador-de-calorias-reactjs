@@ -1,12 +1,13 @@
 import type { Activity } from "../types";
 
 // Definición de los tipos de acciones para el reducer de actividades
-export type ActivityActions = {
-  type: "save-activity";
-  payload: { newActivity: Activity };
-} | {type: "set-activeId";
-  payload: { activeId: Activity["id"] } } | {type: "delete-activity";
-  payload: { activeId: Activity["id"] } };
+export type ActivityActions =
+  | {
+      type: "save-activity";
+      payload: { newActivity: Activity };
+    }
+  | { type: "set-activeId"; payload: { activeId: Activity["id"] } }
+  | { type: "delete-activity"; payload: { activeId: Activity["id"] } };
 
 // El tipo del estado inicial
 export type ActivityState = {
@@ -17,7 +18,7 @@ export type ActivityState = {
 // Estado inicial para el reducer de actividades
 export const initialState: ActivityState = {
   activities: [],
-  activeId: '',
+  activeId: "",
 };
 
 // Reducer para manejar las acciones relacionadas con las actividades
@@ -29,10 +30,12 @@ export const activityReducer = (
   switch (action.type) {
     case "save-activity":
       let updatedActivities: Activity[] = [];
-      if(state.activeId) {
+      if (state.activeId) {
         // Si hay un activeId, actualizamos la actividad existente en lugar de agregar una nueva
         updatedActivities = state.activities.map((activity) =>
-          activity.id === state.activeId ? action.payload.newActivity : activity,
+          activity.id === state.activeId
+            ? action.payload.newActivity
+            : activity,
         );
       } else {
         updatedActivities = [...state.activities, action.payload.newActivity];
@@ -40,7 +43,7 @@ export const activityReducer = (
       return {
         ...state,
         activities: updatedActivities,
-        activeId: '',
+        activeId: "",
       };
     case "set-activeId":
       return {
@@ -50,8 +53,10 @@ export const activityReducer = (
     case "delete-activity":
       return {
         ...state,
-        activities: state.activities.filter((activity) => activity.id !== action.payload.activeId),
-        activeId: '',
+        activities: state.activities.filter(
+          (activity) => activity.id !== action.payload.activeId,
+        ),
+        activeId: "",
       };
 
     default:
