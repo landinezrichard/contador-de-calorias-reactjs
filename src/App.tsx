@@ -1,11 +1,11 @@
-import { useReducer, useEffect, useMemo } from "react";
-import { activityReducer, initialState } from "./reducers/activity-reducer";
+import { useEffect, useMemo } from "react";
 import Form from "./components/Form";
 import ActivityList from "./components/ActivityList";
 import CalorieTracker from "./components/CalorieTracker";
+import { useActivity } from "./hooks/useActivity";
 
 function App() {
-  const [state, dispatch] = useReducer(activityReducer, initialState);
+  const { state, dispatch } = useActivity();
 
   useEffect(() => {
     localStorage.setItem("activities", JSON.stringify(state.activities));
@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-      <header className="bg-lime-600 py-3">
+      <header className="bg-lime-600 py-3 px-4">
         <div className="max-w-4xl mx-auto flex justify-between items-center">
           <h1 className="text-center text-white text-lg font-bold uppercase">
             Contador de Calorias
