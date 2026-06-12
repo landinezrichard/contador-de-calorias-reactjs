@@ -11,9 +11,10 @@ Contador de calorias, hecho en ReactJS con TypeScript, con las siguientes caract
 - Usa "localStorage" para almacenar las actividades.
 - Usa el hook "useReducer" para manejar el estado de las actividades.
 - Uso del hook "useMemo" para el performance.
+- New: Uso de "Context" para el estado global (y no usar tantas props :)).
 - Utiliza TailwindCSS para los estilos.
 - Uso de Heroicons para los iconos de "Editar" y "Eliminar".
-
+- New: scroll hacia el componente "Form", al momento de editar una actividad.
 
 ## Run Server 🏃​
 
