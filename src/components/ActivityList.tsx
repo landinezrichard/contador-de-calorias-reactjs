@@ -4,6 +4,13 @@ import { useActivity } from "../hooks/useActivity";
 export default function ActivityList() {
   const { state, dispatch, categoryName, isEmptyActivities } = useActivity();
 
+  const handleEdit = (id: string) => {
+    dispatch({ type: "set-activeId", payload: { activeId: id } });
+    document
+      .getElementById("activity-form")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <>
       <h2 className="text-4xl font-bold text-slate-600 text-center">
@@ -35,12 +42,7 @@ export default function ActivityList() {
             <div className="flex gap-5 items-center">
               <button
                 type="button"
-                onClick={() =>
-                  dispatch({
-                    type: "set-activeId",
-                    payload: { activeId: activity.id },
-                  })
-                }
+                onClick={() => handleEdit(activity.id)}
                 className="cursor-pointer"
               >
                 <PencilSquareIcon className="h-8 w-8 text-gray-800" />
